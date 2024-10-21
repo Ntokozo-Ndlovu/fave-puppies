@@ -1,0 +1,1 @@
+export { getBreedNameFromUrl } from "./UrlUtil";
