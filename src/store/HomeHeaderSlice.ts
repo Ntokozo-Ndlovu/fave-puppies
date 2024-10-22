@@ -41,7 +41,6 @@ export const HomeHeaderSlice = createSlice(
         builder.addCase(fetchRandomDogBreedNames.pending,(state)=>{
 
         }).addCase(fetchRandomDogBreedNames.fulfilled,(state,action)=>{
-            console.log('payload: ',action.payload)
             state.allResults = action.payload
             ;
         }).addCase(fetchRandomDogBreedNames.rejected,(state)=>{

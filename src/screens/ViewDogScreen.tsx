@@ -18,7 +18,6 @@ export const ViewDogScreen = ()=>{
                 url: dogBreed.url,
                 subject: 'My favorite dog breed'
             }
-            console.log("Sharing")
             openShareDialog(options)
         }
      }
