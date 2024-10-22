@@ -6,11 +6,13 @@ import { DogBreed } from "models";
 import { fetchMultipleRandomImages, fetchImageListByBreed } from "services/clientAPI/DogBreedClient";
 
 interface State{
-    dogs:DogBreed[]
+    dogs:DogBreed[],
+    isLoading:boolean
 }
 
 const initialState:State = {
-    dogs:[]
+    dogs:[],
+    isLoading:false
 }
 
 export const homeSlice = createSlice({
@@ -23,17 +25,21 @@ export const homeSlice = createSlice({
     },
     extraReducers: builder =>
         builder.addCase(fetchRandomListOfDogBreedURL.pending,(state)=>{
-            state;
+            state.isLoading = true;
         }).addCase(fetchRandomListOfDogBreedURL.rejected,(state)=>{
-            state;
+            state.isLoading = false;
         }).addCase(fetchRandomListOfDogBreedURL.fulfilled,(state,action)=>{
-            if(typeof action.payload === 'string')
-                state.dogs = [];
-            else
             state.dogs =  action.payload || [];
+            state.isLoading = false
         }).addCase(fetchListOfDogBreedByName.fulfilled,(state,action)=>{
-            state.dogs = action.payload;
+                state.dogs = action.payload || [];
+            state.isLoading = false;
+        }).addCase(fetchListOfDogBreedByName.rejected,(state)=>{
+            state.isLoading = false;
+        }).addCase(fetchListOfDogBreedByName.pending,(state)=>{
+            state.isLoading = true;
         })
+
 })
 
 
@@ -46,18 +52,12 @@ export const fetchRandomListOfDogBreedURL = createAsyncThunk('homeScreen/fetchRa
 })
 
 export const fetchListOfDogBreedByName = createAsyncThunk('homeScreen/fetchDogByBreedName',async (breedName:string)=>{
-    console.log("Action dispatch: ", breedName)
-    try{
     const response = await fetchImageListByBreed(breedName);
-    console.log("response: ", response)
     return response.data.message.map((url)=>{ return {
         name:getBreedNameFromUrl(url),
         url
     }})
-}
-catch(err){
-    console.log('Error: ', err)
-}
+
 })
 
 export const {fetchDogs} = homeSlice.actions;

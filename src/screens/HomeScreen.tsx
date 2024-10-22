@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyleSheet, View, ScrollView,Text, SafeAreaView} from "react-native"
+import { StyleSheet, View, ScrollView,Text, SafeAreaView, ActivityIndicator} from "react-native"
 import { useSelector , useDispatch} from 'react-redux';
 import { useEffect } from "react";
 
@@ -14,6 +14,7 @@ import { setDogBreed } from "store/ViewDogSlice";
 
 
 export const HomeScreen = ({navigation}:any)=>{
+    const isLoading = useSelector((state:RootState)=> state.home.isLoading);
     const dogBreedsList:DogBreed[]  = useSelector((state:RootState)=> state.home.dogs);
     const dispatch = useDispatch<AppDispatch>();
   
@@ -27,6 +28,8 @@ export const HomeScreen = ({navigation}:any)=>{
     },[])
   
     return <SafeAreaView style={styles.container}>
+        {isLoading ? <ActivityIndicator size="large" />
+        :
         <ScrollView>     
         <Text style={styles.descriptionText} >View Dog Pictures</Text>
       
@@ -37,7 +40,7 @@ export const HomeScreen = ({navigation}:any)=>{
         )
         }
     </View>
-    </ScrollView>
+    </ScrollView>}
         </SafeAreaView>
 }
 
