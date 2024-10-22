@@ -118,6 +118,6 @@ const styles = StyleSheet.create({
         },
         registerClickText:{
             color: Colors.light.text,
-            fontWeight:600    
+            fontWeight:'600'    
         }
   })

@@ -33,7 +33,7 @@ export const RegisterScreen = ({navigation}:any)=>{
 
         <View style={styles.buttonContainer} >
         <Pressable  style={styles.registerButton} onPress={()=> navigation.navigate('Home')}><Text style={styles.registerButtonText}>Register</Text></Pressable> 
-            <Text>Click <Text onPress={()=> navigation.navigate('Login')}>here </Text> to go back to login 
+            <Text style={styles.userLoginText } >Click <Text  style={styles.userLoginClickText } onPress={()=> navigation.navigate('Login')}>here </Text> to go back to login 
         </Text>
     </View>
     </SafeAreaView>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 },
 registerButtonText:{
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "500",
     color: Colors.light.text
 },
     registerInfoContainer:{
@@ -103,5 +103,13 @@ registerButtonText:{
         justifyContent:'space-evenly',
         width:'100%',
         paddingLeft:10
+    },
+    userLoginText:{
+        color:Colors.light.text,
+    },
+    userLoginClickText:{
+        color:Colors.light.text,
+        fontWeight: 'bold',
+        
     }
 })
