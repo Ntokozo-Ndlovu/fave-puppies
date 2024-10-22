@@ -1,5 +1,5 @@
 import React from "react"
-import { View , StyleSheet , StatusBar, ScrollView} from "react-native"
+import { View , StyleSheet , StatusBar, Platform, ScrollView} from "react-native"
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -16,13 +16,19 @@ interface Props{
 export const BreedList = (props:Props)=>{
     const insets = useSafeAreaInsets();
     const list:IListItem[] = props.list || [];
-    const headerHeight = useHeaderHeight();
-    const statusBarHeight = insets.top;
-    
-return<View style={[styles.container, {top: 15 + statusBarHeight + headerHeight}]}>
-       {list.map((item,index)=><ListItem onPress={()=>{props.handler(item.name)}} key={index} >{item.name}</ListItem>)}
-</View>
-}
+    let heightStatusAndHeader = 0
+    const headerHeight =  useHeaderHeight();
+    if(Platform.OS == 'android' && StatusBar.currentHeight){
+        heightStatusAndHeader = 15 + headerHeight + StatusBar.currentHeight
+    }
+    else if(Platform.OS == 'ios' && StatusBar.currentHeight){
+    heightStatusAndHeader = 15 + headerHeight + insets.top;
+    }
+
+    return<View style={[styles.container, {top: heightStatusAndHeader}]}>
+           {list.map((item,index)=><ListItem onPress={()=>{props.handler(item.name)}} key={index} >{item.name}</ListItem>)}
+        </View>
+    }
 
 const styles = StyleSheet.create({
     container:{
