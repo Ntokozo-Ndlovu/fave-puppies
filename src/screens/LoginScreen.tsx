@@ -1,3 +1,4 @@
+import React from "react";
 import { View, Button, Image ,Text, TextInput, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
 import { useEffect, useRef, useState } from "react";
@@ -24,15 +25,15 @@ export const LoginScreen = ({navigation}:any)=>{
     return <View style={ styles.container }>
             <View style={ styles.loginTextInfo }>
             <Text style={ styles.loginTextInfoWelcome } >Welcome <Image style={styles.iconImage} source={require('../../assets/pet.png')}/> Fave Puppy</Text>
-            <Text>Login or Create new user</Text>
+            <Text style={ styles.loginTextInfoDescription }>Login or Create new user</Text>
             </View>
             <View style={ styles.userInputContainer}>
-            <InputBoxLabel onChangeText={(text:any)=> setUserName(text)} labelName="Username" placeholder="Username"/>      
-            <InputBoxLabel onChangeText={(text:any)=> setPassword(text)} labelName="Password" placeholder="Password"/>      
+            <TextInput style={styles.userInput } onChangeText={(text:any)=> setUserName(text)}  placeholderTextColor={Colors.light.text} placeholder="Username"/>      
+            <TextInput style={styles.userInput } onChangeText={(text:any)=> setPassword(text)}  placeholderTextColor={Colors.light.text} placeholder="Password"/>      
             </View>
             <View style={styles.buttonContainer} >
             <Pressable  style={styles.loginButton} onPress={()=> navigation.navigate('Home')}><Text style={styles.loginButtonText}>Login</Text></Pressable> 
-            <Text>click here to <Text onPress={()=> navigation.navigate('Register')}>Register</Text> 
+            <Text style={styles.registerText}>click <Text style={styles.registerClickText} onPress={()=> navigation.navigate('Register')}>here to Register</Text> 
             </Text>
             </View>
     </View>
@@ -65,10 +66,14 @@ const styles = StyleSheet.create({
             height:'15%',
             width: '100%',
             justifyContent: 'center',
-            alignItems:'center'
+            alignItems:'center',
+            color: Colors.light.text
+        },loginTextInfoDescription:{
+            color:Colors.light.text
         },
         loginTextInfoWelcome:{
-            fontSize:30
+            fontSize:30,
+            color: Colors.light.text
         },
         userInputContainer:{
             top: '35%',
@@ -82,12 +87,16 @@ const styles = StyleSheet.create({
             color: Colors.light.text,
             height: 40,
             borderColor: 'gray',
-            borderWidth: 1,
+            borderWidth: 0,
             borderRadius: 5,
-            paddingLeft: 5
+            paddingHorizontal: 10,
+            paddingVertical:5,
+            backgroundColor: Colors.light.dark,
+            width: '80%'
         },
         userInputText:{
-            fontSize:10
+            fontSize:20,
+            color: Colors.light.text
         },
         loginButton:{
             backgroundColor: Colors.light.secondary,
@@ -99,10 +108,16 @@ const styles = StyleSheet.create({
             borderRadius: 15
         },
         loginButtonText:{
-            color: Colors.light.white,
             fontSize: 20,
-            fontWeight: "bold"
+            fontWeight: "bold",
+            color: Colors.light.text
         },
-        registerButton:{
+        registerText:{
+            marginTop: 10,
+            color: Colors.light.text
+        },
+        registerClickText:{
+            color: Colors.light.text,
+            fontWeight:600    
         }
   })

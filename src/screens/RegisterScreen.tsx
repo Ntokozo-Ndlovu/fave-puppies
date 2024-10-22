@@ -1,8 +1,8 @@
-import { Button, StyleSheet, SafeAreaView, View ,Text, TextInput, Pressable} from "react-native"
+import React from "react"
+import {  StyleSheet, SafeAreaView, View ,Text, Pressable, TextInput} from "react-native"
 import { useState } from "react"
 
 import { Colors } from "@constants"
-import { InputBoxLabel } from "components"
 
 
 export const RegisterScreen = ({navigation}:any)=>{
@@ -20,15 +20,15 @@ export const RegisterScreen = ({navigation}:any)=>{
             </Text>
         </View>
         <View style={styles.registerInputsContainer} >
-        <InputBoxLabel labelName="Name" placeholder="Name" onChangeText={(text:any)=> setName(text)} />
+        <TextInput style={styles.userInput} placeholderTextColor={Colors.light.text } placeholder="Name" onChangeText={(text:any)=> setName(text)} />
         
-        <InputBoxLabel labelName="Suname" placeholder="Surname" onChangeText={(text:any)=> setSurname(text)} />
+        <TextInput style={styles.userInput} placeholderTextColor={Colors.light.text }  placeholder="Surname" onChangeText={(text:any)=> setSurname(text)} />
         
-        <InputBoxLabel labelName="Username" placeholder="Username" onChangeText={(text:any)=> setUsername(text)} />
+        <TextInput style={styles.userInput} placeholderTextColor={Colors.light.text }  placeholder="Username" onChangeText={(text:any)=> setUsername(text)} />
 
-        <InputBoxLabel labelName="Password" placeholder="Password" onChangeText={(text:any)=> setPassword(text)} />
+        <TextInput style={styles.userInput} placeholderTextColor={Colors.light.text }  placeholder="Password" onChangeText={(text:any)=> setPassword(text)} />
 
-        <InputBoxLabel labelName="Retype Password" placeholder="Password" onChangeText={(text:any)=> setPassword(text)} />
+        <TextInput style={styles.userInput} placeholderTextColor={Colors.light.text }  placeholder="Password" onChangeText={(text:any)=> setPassword(text)} />
         </View>
 
         <View style={styles.buttonContainer} >
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 200,
         justifyContent:'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        color: Colors.light.text
     },
     container: {
         backgroundColor: Colors.light.background,
@@ -60,12 +61,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems:'center',
     marginBottom: 2,
-    borderRadius: 15
+    borderRadius: 15,
+    color: Colors.light.text
 },
 registerButtonText:{
-    color: Colors.light.white,
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: Colors.light.text
 },
     registerInfoContainer:{
         position:'absolute',
@@ -76,7 +78,23 @@ registerButtonText:{
         alignItems:'center'
     },
     registerInfoText:{
-        fontSize:20
+        fontSize:20,
+        color: Colors.light.text
+    },
+    userInput:{
+        color: Colors.light.text,
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 0,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical:5,
+        backgroundColor: Colors.light.dark,
+        width: '80%'
+    },
+    userInputText:{
+        fontSize:10,
+        color: Colors.light.text
     },
     registerInputsContainer:{
         position:'absolute',

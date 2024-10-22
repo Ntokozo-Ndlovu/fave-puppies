@@ -1,14 +1,16 @@
-import { StyleSheet, View, Image, ScrollView,Text, TextInput, Touchable, TouchableHighlight, Alert, SafeAreaView} from "react-native"
+import React from "react";
+
+import { StyleSheet, View, ScrollView,Text, SafeAreaView} from "react-native"
 import { useSelector , useDispatch} from 'react-redux';
 import { useEffect } from "react";
 
 
 import { DogCard } from "components";
 import { Colors } from "@constants"
-import { fetchRandomListOfDogBreedURL } from "./HomeScreenSlice";
+import { fetchRandomListOfDogBreedURL } from "../store/HomeScreenSlice";
 import { AppDispatch, RootState } from "store";
 import { DogBreed } from "models";
-import { setDogBreed } from "./ViewDogSlice";
+import { setDogBreed } from "store/ViewDogSlice";
 
 
 export const HomeScreen = ({navigation}:any)=>{
@@ -26,7 +28,7 @@ export const HomeScreen = ({navigation}:any)=>{
   
     return <SafeAreaView style={styles.container}>
         <ScrollView>     
-        <Text style={styles.descriptionText} >Click to view the dog picture</Text>
+        <Text style={styles.descriptionText} >View Dog Pictures</Text>
       
         <View style={styles.imagesContainer}>
             {
@@ -59,6 +61,11 @@ const styles = StyleSheet.create({
     },
     descriptionText:{
         marginTop:10,
-        padding:5
+        padding:5,
+        fontSize: 18,
+        fontWeight:'600',
+        color: Colors.light.secondary,
+        paddingVertical:5,
+        paddingHorizontal:10
     }
  })

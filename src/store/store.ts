@@ -1,16 +1,17 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
-import guessDogReducer from 'screens/GuessDogBreedSlice';
-import homeReducer from 'screens/HomeScreenSlice';
-import viewDogBreedReducer from 'screens/ViewDogSlice';
+import guessDogReducer from './GuessDogBreedSlice';
+import homeReducer from './HomeScreenSlice';
+import viewDogBreedReducer from './ViewDogSlice';
+import homeHeaderReducer from './HomeHeaderSlice'
 
 export const store = configureStore({
     reducer:{
         guessDog:guessDogReducer,
         home:homeReducer,
-        viewDogBreed:viewDogBreedReducer
+        viewDogBreed:viewDogBreedReducer,
+        homeHeader:homeHeaderReducer
     }
 })
 

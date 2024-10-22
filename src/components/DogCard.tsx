@@ -1,5 +1,7 @@
-import { Colors } from "@constants"
+import React from "react"
 import { View, Image, Text, StyleSheet, TouchableHighlight } from "react-native"
+
+import { Colors } from "@constants"
 
 export const DogCard = ({dogBreed,onPress}:any)=>{
     return  <TouchableHighlight onPress={()=> onPress(dogBreed)}> 
@@ -15,9 +17,10 @@ export const DogCard = ({dogBreed,onPress}:any)=>{
 
 const styles = StyleSheet.create({
     dogCardContainer:{
-        backgroundColor:'#00000005',
+        backgroundColor: Colors.light.dark,
         height: '100%',
-        flex:1
+        flex:1,
+        marginBottom: 20
     },
     image:{
         width:'100%',
@@ -25,6 +28,8 @@ const styles = StyleSheet.create({
         resizeMode:'contain'
     },
     name:{
-        color: Colors.light.text
+        color: Colors.light.text,
+        fontSize: 20,
+        padding:10
     }
 })

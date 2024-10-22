@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { HeaderTitleProps } from '@react-navigation/elements'
 import Ionicons from '@expo/vector-icons/Ionicons'
-
 
 import { HomeScreen } from 'screens';
 import { GuessDogBreedScreen } from 'screens';
 import { Colors } from '@constants';
+import { HomeHeader } from 'components*';
 
 const Tab = createBottomTabNavigator();
+
+
 
 export const HomeNavigationTabs = ()=>{
     return<Tab.Navigator 
@@ -25,13 +27,6 @@ export const HomeNavigationTabs = ()=>{
         headerTitleContainerStyle:{
             width:'100%'
         },
-        headerTitle:(props)=><View style={styles.container}>
-            <Text style={styles.headerText}>{props.children}</Text>
-            <View style={styles.searchContainer}>
-                <TextInput placeholder='Search' placeholderTextColor={Colors.light.text}></TextInput>
-                <Ionicons name="search" size={28} color={Colors.light.text} />
-            </View>
-        </View>,
         headerTintColor:Colors.light.text,
         headerShadowVisible:false,
         headerTitleStyle:{
@@ -41,34 +36,22 @@ export const HomeNavigationTabs = ()=>{
     }}>
       <Tab.Screen name="HomeScreen" options={{
         title:'Home',
+       tabBarActiveTintColor:Colors.light.text,
+        tabBarIcon:()=>  <Ionicons name="home" size={28} color={Colors.light.text} />
+       ,
+        headerTitle:(props:HeaderTitleProps)=> <HomeHeader>{props.children}</HomeHeader>,
+      
     }} component={HomeScreen} />
-      <Tab.Screen name="Guess Breed Game" component={GuessDogBreedScreen} />
+      <Tab.Screen name="Guess Breed Game" options={{
+        headerShown:false,
+        tabBarActiveTintColor:Colors.light.text,
+        tabBarIcon:()=>  <Ionicons name="checkmark-circle-outline" size={28} color={Colors.light.text} />
+       ,
+       
+     }} component={GuessDogBreedScreen} />
     </Tab.Navigator>
 
 }
 
 
 
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        width: '100%'
-    },
-    headerText:{
-        color: "#ffffff",
-        fontSize: 20,
-        fontWeight:'bold'
-    },
-    searchContainer:{
-        width: '50%',
-        flexDirection: 'row',
-        justifyContent:'space-between'
-    },
-    
-    searchTextBox:{
-        color:Colors.light.text
-    }
-})

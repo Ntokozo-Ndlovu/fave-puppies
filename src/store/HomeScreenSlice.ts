@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { getBreedNameFromUrl } from "../utils/UrlUtil";
 import { DogBreed } from "models";
-import { fetchMultipleRandomImages } from "services/clientAPI/DogBreedClient";
+import { fetchMultipleRandomImages, fetchImageListByBreed } from "services/clientAPI/DogBreedClient";
 
 interface State{
     dogs:DogBreed[]
@@ -31,19 +31,34 @@ export const homeSlice = createSlice({
                 state.dogs = [];
             else
             state.dogs =  action.payload || [];
+        }).addCase(fetchListOfDogBreedByName.fulfilled,(state,action)=>{
+            state.dogs = action.payload;
         })
 })
 
 
 export const fetchRandomListOfDogBreedURL = createAsyncThunk('homeScreen/fetchRandomDogBreed',async ()=>{
-        let response = await fetchMultipleRandomImages();
-
+        const response = await fetchMultipleRandomImages();
         return response.data.message.map((url)=>{ return {
             name:getBreedNameFromUrl(url),
             url
         }})
 })
 
+export const fetchListOfDogBreedByName = createAsyncThunk('homeScreen/fetchDogByBreedName',async (breedName:string)=>{
+    console.log("Action dispatch: ", breedName)
+    try{
+    const response = await fetchImageListByBreed(breedName);
+    console.log("response: ", response)
+    return response.data.message.map((url)=>{ return {
+        name:getBreedNameFromUrl(url),
+        url
+    }})
+}
+catch(err){
+    console.log('Error: ', err)
+}
+})
 
 export const {fetchDogs} = homeSlice.actions;
 export default homeSlice.reducer; 
